@@ -1,11 +1,15 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import ImagePickerComponent from './src/components/ImagePickerComponent';
+import ContactsComponent from './src/components/ContactsComponent';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ImagePickerComponent />
+      <ScrollView>
+        <ContactsComponent />
+      </ScrollView>
     </SafeAreaView>
   );
 }
