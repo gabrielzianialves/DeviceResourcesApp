@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Alert, Button } from 'react-native';
 import * as Contacts from 'expo-contacts';
+import { FontAwesome } from '@expo/vector-icons';
 
 const ContactsComponent = () => {
     const [contacts, setContacts] = useState([]);
@@ -39,19 +40,25 @@ const ContactsComponent = () => {
         <View style={styles.contactItem}>
 
             <Text style={styles.contactName}>
-                {item.firstName } {item.lastName}
+                {item.firstName} {item.lastName}
             </Text>
 
             {item.phoneNumbers && item.phoneNumbers.map((phone, index) => (
-                <Text key={index} style={styles.contactDetail}>
-                    📞 {phone.number}
-                </Text>
+                <View key={index} style={styles.contactDetailContainer}>
+                    <FontAwesome name="phone" size={16} color="#555" style={styles.icon}/>
+                    <Text style={styles.contactDetail}>
+                        {phone.number}
+                    </Text>
+                </View>
             ))}
 
             {item.emails && item.emails.map((email, index) => (
-                <Text key={index} style={styles.contactDetail}>
-                    📧 {email.email}
-                </Text>
+                <View key={index} style={styles.contactDetailContainer}>
+                    <FontAwesome name="envelope" size={16} color="#555" style={styles.icon}/>
+                    <Text style={styles.contactDetail}>
+                        {email.email}
+                    </Text>
+                </View>
             ))}
 
         </View>
@@ -94,6 +101,14 @@ const styles = StyleSheet.create({
         color: '#555',
         marginTop: 5,
     },
+    contactDetailContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        margintop: 5
+    },
+    icon: {
+        marginRight: 10
+    }
 });
 
 export default ContactsComponent;
