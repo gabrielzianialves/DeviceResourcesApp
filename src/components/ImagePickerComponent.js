@@ -12,13 +12,15 @@ const ImagePickerComponent = () => {
             return;
         }
 
+        const mediaTypes = ImagePicker.MediaType?.Images ?? ImagePicker.MediaTypeOptions?.Images;
+
         const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            mediaTypes,
             allowsEditing: true,
             quality: 1
         });
 
-        if (!result.cancelled) {
+        if (result.cancelled) {
             Alert.alert("Operação cancelada", "Você cancelou a seleção de imagem.");
             return;
         }
