@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
-import ImagePickerComponent from '../src/components/ImagePickerComponent';
-import ContactsComponent from '../src/components/ContactsComponent';
+import ImagePickerComponent from '../components/ImagePickerComponent';
+import ContactsComponent from '../components/ContactsComponent';
 
 const Home = () => {
   return (
