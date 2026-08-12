@@ -52,6 +52,7 @@ npm install
 npx expo install expo-image-picker
 npx expo install expo-contacts
 npx expo install @expo/vector-icons
+npx expo install @react-navigation/native @react-navigation/native-stack
 ```
 
 

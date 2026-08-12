@@ -1,24 +1,16 @@
-import React from 'react';
-import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
-import ImagePickerComponent from './src/components/ImagePickerComponent';
-import ContactsComponent from './src/components/ContactsComponent';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './screens/Home';
 
-const App = () => {
+const Stack = createNativeStackNavigator();
+
+export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <ImagePickerComponent />
-      <ScrollView>
-        <ContactsComponent />
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f0f0f0'
-  },
-});
-
-export default App;

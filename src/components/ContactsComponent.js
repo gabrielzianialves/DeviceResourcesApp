@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Alert, Button } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -66,13 +66,19 @@ const ContactsComponent = () => {
 
     return (
         <View style={styles.container}>
-            <Button title="Recarregar Contatos" onPress={loadContacts} />
-            <FlatList
-                data={contacts}
-                keyExtractor={(item) => item.id}
-                renderItem={renderItem}
-                contentContainerStyle={styles.list}
-            />
+            <View style={styles.card}>
+                <TouchableOpacity style={styles.button} onPress={loadContacts} activeOpacity={0.85}>
+                    <Text style={styles.buttonText}>Recarregar Contatos</Text>
+                </TouchableOpacity>
+
+                <FlatList
+                    data={contacts}
+                    keyExtractor={(item) => item.id}
+                    renderItem={renderItem}
+                    contentContainerStyle={styles.list}
+                    style={styles.listWrapper}
+                />
+            </View>
         </View>
     );
     
@@ -82,10 +88,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,    
         padding: 20,
-        backgroundColor: '#fff',
+        backgroundColor: '#f0f0f0',
     },
     list: {
         marginTop: 20,
+    },
+    listWrapper: {
+        width: '100%'
     },
     contactItem: {
         padding: 15,
@@ -108,6 +117,29 @@ const styles = StyleSheet.create({
     },
     icon: {
         marginRight: 10
+    }
+    ,
+    card: {
+        width: '100%',
+        alignItems: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderRadius: 12,
+        backgroundColor: '#f8fafc',
+        marginBottom: 12,
+    },
+    button: {
+        width: '80%',
+        height: 48,
+        borderRadius: 12,
+        backgroundColor: '#e5e7eb',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: '#111827',
+        fontWeight: '600',
+        fontSize: 16,
     }
 });
 

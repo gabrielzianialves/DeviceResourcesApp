@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button, Image, Alert, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, Image, Alert, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
 const ImagePickerComponent = () => {
@@ -20,23 +20,34 @@ const ImagePickerComponent = () => {
             quality: 1
         });
 
-        if (result.cancelled) {
+        if (result.canceled) {
             Alert.alert("Operação cancelada", "Você cancelou a seleção de imagem.");
             return;
         }
 
-        setImageUri(result.uri);
+        const uri = result.assets?.[0]?.uri;
+        if (!uri) {
+            Alert.alert("Erro", "Não foi possível obter a imagem selecionada.");
+            return;
+        }
+
+        setImageUri(uri);
     }
 
     return (
         <View style={styles.container}>
-            <Button title="Selecionar Imagem" onPress={selectImage} />
-            {imageUri && (
-                <Image 
-                    source={{ uri: imageUri }} 
-                    style={styles.image} 
-                />
-            )}
+            <View style={styles.card}>
+                <TouchableOpacity style={styles.button} onPress={selectImage} activeOpacity={0.85}>
+                    <Text style={styles.buttonText}>Selecionar Imagem</Text>
+                </TouchableOpacity>
+
+                {imageUri && (
+                    <Image 
+                        source={{ uri: imageUri }} 
+                        style={styles.image} 
+                    />
+                )}
+            </View>
         </View>
     );
 };
@@ -54,6 +65,29 @@ const styles = StyleSheet.create({
         height: 200,
         marginTop: 20,
         borderRadius: 10
+    }
+    ,
+    card: {
+        width: '100%',
+        alignItems: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderRadius: 12,
+        backgroundColor: '#f8fafc',
+        marginBottom: 12,
+    },
+    button: {
+        width: '80%',
+        height: 48,
+        borderRadius: 12,
+        backgroundColor: '#e5e7eb',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonText: {
+        color: '#111827',
+        fontWeight: '600',
+        fontSize: 16,
     }
 });
 
